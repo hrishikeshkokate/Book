@@ -1,0 +1,40 @@
+{
+  "book": [
+    {
+      "id": "100",
+      "name": "Harry Potter",
+      "price": "1499",
+      "authorId": "102"
+    },
+    {
+      "id": "101",
+      "name": "Thousand Stitches",
+      "price": 999,
+      "authorId": "101"
+    },
+    {
+      "id": "102",
+      "name": "Angular",
+      "price": 759,
+      "authorId": "102"
+    },
+    {
+      "id": "103",
+      "name": "java",
+      "price": 849,
+      "authorId": "101"
+    }
+  ],
+  "author": [
+    {
+      "authorId": "101",
+      "authorName": "J.K.Rowling",
+      "id": "af65"
+    },
+    {
+      "authorId": "102",
+      "authorName": "Sudha Murthy",
+      "id": "af65"
+    }
+  ]
+}

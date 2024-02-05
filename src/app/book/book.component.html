@@ -1,0 +1,91 @@
+<div class="container">
+    <h3>Book List</h3>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>AuthorId</th>
+                        <th>AuthorName</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(b of bookList;track b.id){
+                    <tr>
+                        <td>{{ b.id }}</td>
+                        <td>{{ b.name }}</td>
+                        <td>{{ b.price }}</td>
+                        <td>{{ b.authorId }}</td>
+                        @for(author of authorList;track author.authorId){
+                            <div *ngIf="author.authorId==b.authorId">
+                                <td>{{author.authorName}}</td>
+                            </div>
+                        }
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="editBook(b)">Edit</button>
+                            <button type="button" class="btn btn-danger" (click)="deleteBook(b.id)">Delete</button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <h3>Book</h3>
+            <form [formGroup]="bookForm" (ngSubmit)="saveBooks()">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Id</label>
+                            <input type="text" required class="form-control" formControlName="id" placeholder="Book Id">
+                            <div *ngIf="id?.invalid && id?.touched">
+                                <small class="text-danger" *ngIf="id?.errors?.['required']">Id is required</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" required class="form-control" formControlName="name" placeholder="Book name">
+                            <div *ngIf="name?.invalid && name?.touched">
+                                <small class="text-danger" *ngIf="name?.errors?.['required']">Name is required</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" required class="form-control" formControlName="price" placeholder="Book price">
+                            <div *ngIf="price?.invalid && price?.touched">
+                                <small class="text-danger" *ngIf="price?.errors?.['required']">Price is required</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="authorId" class="form-label">Author</label>
+                            <select class="form-control" formControlName="authorId" id="authorId" name="authorId">
+                                <option *ngFor="let author of authorList" [value]="author.authorId">{{ author.authorName }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <button type="submit" *ngIf="!isUpdatebtn" [disabled]="bookForm.invalid" class="btn btn-outline-primary">Add</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="clearForm()">Cancel</button>
+                    <button type="submit" *ngIf="isUpdatebtn" class="btn btn-outline-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
